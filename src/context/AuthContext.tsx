@@ -21,7 +21,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const MOCK_USERS = [
   { email: "admin@test.com", password: "password", name: "Administrador", role: "admin" as UserRole },
-  { email: "usuario@test.com", password: "password", name: "Empleado", role: "user" as UserRole },
+  { email: "hernando@test.com", password: "password", name: "Hernando Pachón", role: "user" as UserRole },
+  { email: "maria@test.com", password: "password", name: "María López", role: "user" as UserRole },
 ];
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

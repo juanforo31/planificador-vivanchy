@@ -26,7 +26,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<AppEvent | null>(null);
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<"month" | "week" | "work_week" | "day" | "agenda">("month");
 
   useEffect(() => {
@@ -42,7 +42,11 @@ export default function Dashboard() {
   if (!mounted || isLoading || !user) return null;
 
   // Convert mock events to react-big-calendar format
-  const calendarEvents: CalendarEvent[] = mockEvents.map(event => {
+  const rawEvents = user.role === "admin" 
+    ? mockEvents 
+    : mockEvents.filter(e => e.patientName === user.name);
+
+  const calendarEvents: CalendarEvent[] = rawEvents.map(event => {
     const [year, month, day] = event.date.split("-").map(Number);
     const [hours, minutes] = event.time.split(":").map(Number);
     const startDate = new Date(year, month - 1, day, hours, minutes);
@@ -140,6 +144,13 @@ export default function Dashboard() {
                 <p><strong>📍 Dirección:</strong> {selectedEvent.address}</p>
                 <p><strong>🤝 Requiere acompañamiento:</strong> {selectedEvent.requiresAccompaniment ? "Sí" : "No"}</p>
                 <p><strong>🚗 Requiere transporte:</strong> {selectedEvent.requiresTransport ? "Sí" : "No"}</p>
+                {selectedEvent.requiresTransport && (
+                  <div style={{ padding: "0.8rem", background: "rgba(30, 64, 175, 0.05)", borderRadius: "8px", borderLeft: "4px solid var(--primary)", marginTop: "0.5rem" }}>
+                    <p style={{ marginBottom: "0.3rem" }}>🧑‍✈️ <strong>Conductor:</strong> {selectedEvent.transportDriver || "Pendiente"}</p>
+                    <p style={{ marginBottom: "0.3rem" }}>🚘 <strong>Placa:</strong> {selectedEvent.transportPlate || "Pendiente"}</p>
+                    <p>⏰ <strong>Hora de recogida:</strong> {selectedEvent.transportTime || "Pendiente"}</p>
+                  </div>
+                )}
               </div>
 
               <div style={{ marginTop: "2rem", display: "flex", justifyContent: "flex-end" }}>

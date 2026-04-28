@@ -7,18 +7,24 @@ export interface Event {
   address: string;
   requiresAccompaniment: boolean;
   requiresTransport: boolean;
+  transportDriver?: string;
+  transportPlate?: string;
+  transportTime?: string;
 }
 
 export const mockEvents: Event[] = [
   {
     id: "1",
     patientName: "Hernando Pachón",
-    date: "2026-01-23", // Assuming current year based on user data
+    date: "2026-01-23", 
     time: "09:00",
     title: "Cita: Reumatología",
     address: "Dir.: Calle 118 # 19 - 52 Cons. 504 Edif. Acocentro",
     requiresAccompaniment: true,
     requiresTransport: true,
+    transportDriver: "Carlos Gómez",
+    transportPlate: "DEF-456",
+    transportTime: "08:15",
   },
   {
     id: "2",
@@ -29,6 +35,9 @@ export const mockEvents: Event[] = [
     address: "Dir.: Av. 15 No. 118-03 Cons. 302",
     requiresAccompaniment: true,
     requiresTransport: true,
+    transportDriver: "Luis Ramírez",
+    transportPlate: "GHI-789",
+    transportTime: "13:45",
   },
   {
     id: "3",
@@ -39,5 +48,8 @@ export const mockEvents: Event[] = [
     address: "Clínica del Country, Cons. 210",
     requiresAccompaniment: false,
     requiresTransport: true,
+    transportDriver: "Ana Martínez",
+    transportPlate: "XYZ-123",
+    transportTime: "09:20",
   }
 ];
