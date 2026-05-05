@@ -28,6 +28,11 @@ export default function EventModal({ event, onClose }: EventModalProps) {
           <p><strong>📅 Fecha:</strong> {event.date} a las {event.time}</p>
           <p><strong>📍 Dirección:</strong> {event.address}</p>
           <p><strong>🤝 Requiere acompañamiento:</strong> {event.requiresAccompaniment ? "Sí" : "No"}</p>
+          {event.requiresAccompaniment && (
+            <div className={styles.transportDetails}>
+              <p className={styles.transportItem}> 🚑 <strong>Aux. de enfermeria:</strong> {event.acompaniment || "Pendiente"}</p>
+            </div>
+          )}
           <p><strong>🚗 Requiere transporte:</strong> {event.requiresTransport ? "Sí" : "No"}</p>
           {event.requiresTransport && (
             <div className={styles.transportDetails}>

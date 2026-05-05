@@ -6,6 +6,7 @@ export interface Event {
   title: string;
   address: string;
   requiresAccompaniment: boolean;
+  acompaniment?: string;
   requiresTransport: boolean;
   transportDriver?: string;
   transportPlate?: string;
@@ -22,6 +23,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Reumatología",
     address: "Dir.: Calle 118 # 19 - 52 Cons. 504 Edif. Acocentro",
     requiresAccompaniment: true,
+    acompaniment: "Fernanda Pérez",
     requiresTransport: true,
     transportDriver: "Carlos Gómez",
     transportPlate: "DEF-456",
@@ -35,6 +37,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Oftalmología",
     address: "Dir.: Av. 15 No. 118-03 Cons. 302",
     requiresAccompaniment: true,
+    acompaniment: "Fernanda Pérez",
     requiresTransport: true,
     transportDriver: "Luis Ramírez",
     transportPlate: "GHI-789",
@@ -63,6 +66,7 @@ export const mockEvents: Event[] = [
     title: "Control General",
     address: "Hospital Universitario",
     requiresAccompaniment: true,
+    acompaniment: "Fernanda Pérez",
     requiresTransport: false,
   },
   {
@@ -83,6 +87,7 @@ export const mockEvents: Event[] = [
     title: "Terapia Física",
     address: "Centro de Rehabilitación Integral",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: true,
     transportDriver: "Pedro Pascal",
     transportPlate: "MNO-321",
@@ -111,6 +116,7 @@ export const mockEvents: Event[] = [
     title: "Revisión: Cardiología",
     address: "Clínica Shaio, Cons. 402",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: true,
     transportDriver: "Carlos Gómez",
     transportPlate: "DEF-456",
@@ -136,6 +142,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Oftalmología",
     address: "Centro Médico Dalí, Cons. 105",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: false,
   },
   {
@@ -146,6 +153,7 @@ export const mockEvents: Event[] = [
     title: "Control Anual",
     address: "Clínica de la Sabana",
     requiresAccompaniment: true,
+    acompaniment: "Ana Martínez",
     requiresTransport: true,
     transportDriver: "Ana Martínez",
     transportPlate: "XYZ-123",
@@ -159,6 +167,7 @@ export const mockEvents: Event[] = [
     title: "Revisión: Reumatología",
     address: "Dir.: Calle 118 # 19 - 52 Cons. 504",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: true,
     transportDriver: "Luis Ramírez",
     transportPlate: "GHI-789",
@@ -174,6 +183,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Cardiología",
     address: "Clínica Shaio, Cons. 402",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: true,
     transportDriver: "Carlos Gómez",
     transportPlate: "DEF-456",
@@ -197,6 +207,7 @@ export const mockEvents: Event[] = [
     title: "Terapia: Fisioterapia",
     address: "Centro de Rehabilitación, Sala 2",
     requiresAccompaniment: true,
+    acompaniment: "Juan Pérez",
     requiresTransport: true,
     transportDriver: "Luis Ramírez",
     transportPlate: "GHI-789",
@@ -223,6 +234,7 @@ export const mockEvents: Event[] = [
     title: "Control General",
     address: "Hospital Universitario, Torre B Cons. 310",
     requiresAccompaniment: true,
+    acompaniment: "Fernanda Pérez",
     requiresTransport: false,
   },
 
@@ -245,6 +257,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Reumatología",
     address: "Dir.: Calle 118 # 19 - 52 Cons. 504",
     requiresAccompaniment: true,
+    acompaniment: "Rafael Mendoza",
     requiresTransport: true,
     transportDriver: "Pedro Pascal",
     transportPlate: "MNO-321",
@@ -271,6 +284,7 @@ export const mockEvents: Event[] = [
     title: "Cita: Dermatología",
     address: "Av. 15 No. 118-03 Cons. 302",
     requiresAccompaniment: true,
+    acompaniment: "Camila Triana",
     requiresTransport: false,
   },
   {
@@ -281,6 +295,7 @@ export const mockEvents: Event[] = [
     title: "Revisión General",
     address: "Clínica del Country, Cons. 210",
     requiresAccompaniment: true,
+    acompaniment: "Fernanda Pérez",
     requiresTransport: true,
     transportDriver: "Ana Martínez",
     transportPlate: "XYZ-123",
