@@ -16,7 +16,7 @@ export const mockEvents: Event[] = [
   {
     id: "1",
     patientName: "Hernando Pachón",
-    date: "2026-01-23", 
+    date: "2026-01-23",
     time: "09:00",
     title: "Cita: Reumatología",
     address: "Dir.: Calle 118 # 19 - 52 Cons. 504 Edif. Acocentro",

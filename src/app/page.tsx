@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { Calendar, dateFnsLocalizer, Event as CalendarEvent } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
@@ -42,8 +43,8 @@ export default function Dashboard() {
   if (!mounted || isLoading || !user) return null;
 
   // Convert mock events to react-big-calendar format
-  const rawEvents = user.role === "admin" 
-    ? mockEvents 
+  const rawEvents = user.role === "admin"
+    ? mockEvents
     : mockEvents.filter(e => e.patientName === user.name);
 
   const calendarEvents: CalendarEvent[] = rawEvents.map(event => {
@@ -63,9 +64,12 @@ export default function Dashboard() {
   return (
     <div className="page-container">
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <div>
-          <h1 style={{ fontSize: "2rem", color: "var(--primary)" }}>Planificador</h1>
-          <p style={{ color: "var(--text-muted)" }}>Bienvenido, {user.name}</p>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <Image src="/logo.jpeg" alt="Vivanchy Logo" width={80} height={80} />
+          <div>
+            <h1 style={{ fontSize: "2rem", color: "var(--primary)", margin: 0 }}>Planificador</h1>
+            <p style={{ color: "var(--text-muted)", margin: "0.2rem 0 0 0" }}>Bienvenido, {user.name}</p>
+          </div>
         </div>
         <button onClick={logout} className="btn" style={{ background: "rgba(239, 68, 68, 0.1)", color: "var(--danger)" }}>
           Cerrar Sesión
@@ -75,7 +79,7 @@ export default function Dashboard() {
       <main>
         <div className="glass-panel" style={{ padding: "2rem", minHeight: "70vh" }}>
           <h2 style={{ marginBottom: "1.5rem" }}>Calendario de Citas</h2>
-          
+
           <div style={{ height: "600px" }}>
             <Calendar
               localizer={localizer}
@@ -127,18 +131,18 @@ export default function Dashboard() {
             backgroundColor: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000
           }}>
             <div className="glass-card" style={{ padding: "2rem", width: "100%", maxWidth: "500px", position: "relative" }}>
-              <button 
+              <button
                 onClick={() => setSelectedEvent(null)}
                 style={{ position: "absolute", top: "1rem", right: "1rem", background: "none", border: "none", fontSize: "1.5rem", cursor: "pointer", color: "var(--text-muted)" }}
               >&times;</button>
-              
+
               <h2 style={{ marginBottom: "0.5rem", color: "var(--primary)", paddingRight: "2rem" }}>
                 {selectedEvent.title}
               </h2>
               <div style={{ marginBottom: "1.5rem", fontWeight: 500, fontSize: "1.1rem" }}>
                 👤 {selectedEvent.patientName}
               </div>
-              
+
               <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", color: "var(--text-muted)", fontSize: "0.95rem" }}>
                 <p><strong>📅 Fecha:</strong> {selectedEvent.date} a las {selectedEvent.time}</p>
                 <p><strong>📍 Dirección:</strong> {selectedEvent.address}</p>

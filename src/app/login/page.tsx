@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -38,7 +39,14 @@ export default function LoginPage() {
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh" }}>
       <div className="glass-panel" style={{ padding: "3rem", width: "100%", maxWidth: "400px" }}>
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <h1 style={{ fontSize: "1.8rem", fontWeight: "bold", color: "var(--primary)" }}>Planificador</h1>
+          <Image
+            src="/logo.jpeg"
+            alt="Vivanchy Logo"
+            width={120}
+            height={120}
+            style={{ margin: "0 auto", display: "block" }}
+          />
+          <h1 style={{ fontSize: "1.8rem", fontWeight: "bold", color: "var(--primary)", marginTop: "1rem" }}>Planificador</h1>
           <p style={{ color: "var(--text-muted)", marginTop: "0.5rem" }}>Inicia sesión para continuar</p>
         </div>
 

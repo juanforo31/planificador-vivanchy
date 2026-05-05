@@ -1,6 +1,7 @@
 :root {
-  --primary: #1E40AF; /* Azul Rey */
-  --primary-hover: #1E3A8A;
+  --primary: #104060;
+  --primary-hover: #389eb5;
+  --primary-light: #7dcbe0;
   --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(255, 255, 255, 0.8);

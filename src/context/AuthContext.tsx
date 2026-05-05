@@ -42,6 +42,39 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+
+    let timeoutId: NodeJS.Timeout;
+
+    const resetTimeout = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      // 10 minutes timeout
+      timeoutId = setTimeout(() => {
+        logout();
+      }, 10 * 60 * 1000);
+    };
+
+    resetTimeout();
+
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    
+    const handleActivity = () => {
+      resetTimeout();
+    };
+
+    events.forEach(event => {
+      window.addEventListener(event, handleActivity);
+    });
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      events.forEach(event => {
+        window.removeEventListener(event, handleActivity);
+      });
+    };
+  }, [user]);
+
   const login = async (email: string, password: string): Promise<boolean> => {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 800));
