@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin: 0.2rem 0 0 0;
+}
+
+.logoutBtn {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}

@@ -1,0 +1,12 @@
+.container {
+  padding: 2rem;
+  min-height: 70vh;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+}
+
+.calendarWrapper {
+  height: 600px;
+}
