@@ -12,18 +12,18 @@ export default function EventModal({ event, onClose }: EventModalProps) {
   return (
     <div className={styles.overlay}>
       <div className={`glass-card ${styles.modal}`}>
-        <button 
+        <button
           onClick={onClose}
           className={styles.closeBtn}
         >&times;</button>
-        
+
         <h2 className={styles.title}>
           {event.title}
         </h2>
         <div className={styles.patientName}>
           👤 {event.patientName}
         </div>
-        
+
         <div className={styles.details}>
           <p><strong>📅 Fecha:</strong> {event.date} a las {event.time}</p>
           <p><strong>📍 Dirección:</strong> {event.address}</p>
