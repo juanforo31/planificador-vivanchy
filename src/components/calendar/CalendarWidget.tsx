@@ -42,7 +42,6 @@ export default function CalendarWidget({
       
       <div className={styles.calendarWrapper}>
         <Calendar
-          style={{ height: "100%" }}
           localizer={localizer}
           events={events}
           date={currentDate}
