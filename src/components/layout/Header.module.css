@@ -21,8 +21,3 @@
   color: var(--text-muted);
   margin: 0.2rem 0 0 0;
 }
-
-.logoutBtn {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger);
-}

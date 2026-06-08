@@ -17,8 +17,6 @@ export const metadata: Metadata = {
   description: "Prototipo funcional del planificador de citas.",
 };
 
-import { Providers } from "./Providers";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

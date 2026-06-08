@@ -1,74 +1,17 @@
-"use client";
+import Image from "next/image";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
-import { Event as AppEvent } from "@/data/mockEvents";
-import { mockEvents } from "@/data/mockEvents";
-import { Event as CalendarEvent } from "react-big-calendar";
-import Header from "@/components/layout/Header";
-import CalendarWidget from "@/components/calendar/CalendarWidget";
-import EventModal from "@/components/calendar/EventModal";
-
-export default function Dashboard() {
-  const { user, isLoading } = useAuth();
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<AppEvent | null>(null);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentView, setCurrentView] = useState<"month" | "week" | "work_week" | "day" | "agenda">("month");
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.push("/login");
-    }
-  }, [user, isLoading, router]);
-
-  if (!mounted || isLoading || !user) return null;
-
-  // Convert mock events to react-big-calendar format
-  const rawEvents = user.role === "admin"
-    ? mockEvents
-    : mockEvents.filter(e => e.patientName === user.name);
-
-  const calendarEvents: CalendarEvent[] = rawEvents.map(event => {
-    const [year, month, day] = event.date.split("-").map(Number);
-    const [hours, minutes] = event.time.split(":").map(Number);
-    const startDate = new Date(year, month - 1, day, hours, minutes);
-    const endDate = new Date(year, month - 1, day, hours + 1, minutes);
-
-    return {
-      title: `${event.title} - ${event.patientName}`,
-      start: startDate,
-      end: endDate,
-      resource: event
-    };
-  });
-
+export default function Home() {
   return (
     <div className="page-container">
-      <Header />
-
-      <main>
-        <CalendarWidget 
-          events={calendarEvents}
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-          currentView={currentView}
-          setCurrentView={setCurrentView}
-          onSelectEvent={setSelectedEvent}
-        />
-
-        {selectedEvent && (
-          <EventModal 
-            event={selectedEvent} 
-            onClose={() => setSelectedEvent(null)} 
-          />
-        )}
+      <main style={{ textAlign: "center", marginTop: "4rem" }}>
+        <div className="glass-panel" style={{ display: "inline-block", padding: "2.5rem" }}>
+          <Image src="/logo.jpeg" alt="Vivanchy Logo" width={120} height={120} />
+          <h1>Planificador | Vivanchy</h1>
+          <p>
+            Para ver tus citas, ingresa al enlace personal que Vivanchy compartió contigo.
+            Si no lo tienes a la mano, contáctanos y te lo enviaremos de nuevo.
+          </p>
+        </div>
       </main>
     </div>
   );

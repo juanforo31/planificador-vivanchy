@@ -4,7 +4,7 @@ import { Calendar, dateFnsLocalizer, Event as CalendarEvent } from "react-big-ca
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { es } from "date-fns/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { Event as AppEvent } from "@/data/mockEvents";
+import { Event as AppEvent } from "@/types/event";
 import styles from "./CalendarWidget.module.css";
 
 const locales = {
@@ -77,7 +77,7 @@ export default function CalendarWidget({
               <div>
                 <strong>{(event.resource as AppEvent).patientName}</strong>
                 <br />
-                <span style={{ fontSize: "0.75rem", opacity: 0.9 }}>{(event.resource as AppEvent).title}</span>
+                <span style={{ fontSize: "0.75rem", opacity: 0.9 }}>{(event.resource as AppEvent).tipoServicio}</span>
               </div>
             )
           }}

@@ -1,12 +1,21 @@
 "use client";
 
-import { Event as AppEvent } from "@/data/mockEvents";
+import { Event as AppEvent } from "@/types/event";
 import styles from "./EventModal.module.css";
 
 interface EventModalProps {
   event: AppEvent;
   onClose: () => void;
 }
+
+const fechaFormateada = (iso: string) =>
+  new Date(iso).toLocaleString("es-CO", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
 export default function EventModal({ event, onClose }: EventModalProps) {
   return (
@@ -18,28 +27,36 @@ export default function EventModal({ event, onClose }: EventModalProps) {
         >&times;</button>
 
         <h2 className={styles.title}>
-          {event.title}
+          {event.tipoServicio}
         </h2>
         <div className={styles.patientName}>
           👤 {event.patientName}
         </div>
 
         <div className={styles.details}>
-          <p><strong>📅 Fecha:</strong> {event.date} a las {event.time}</p>
-          <p><strong>📍 Dirección:</strong> {event.address}</p>
-          <p><strong>🤝 Requiere acompañamiento:</strong> {event.requiresAccompaniment ? "Sí" : "No"}</p>
-          {event.requiresAccompaniment && (
+          <p><strong>📅 Fecha:</strong> {fechaFormateada(event.fecha)}</p>
+          <p><strong>📋 Estado:</strong> {event.estado}</p>
+          {event.direccionOrigen && (
+            <p><strong>📍 Dirección de origen:</strong> {event.direccionOrigen}</p>
+          )}
+          {event.direccionDestino && (
+            <p><strong>📍 Dirección de destino:</strong> {event.direccionDestino}</p>
+          )}
+
+          {event.coordinadorNombre && (
             <div className={styles.transportDetails}>
-              <p className={styles.transportItem}> 🚑 <strong>Aux. de enfermeria:</strong> {event.acompaniment || "Pendiente"}</p>
+              <p className={styles.transportItem}>🧑‍⚕️ <strong>Coordinador:</strong> {event.coordinadorNombre}</p>
+              {event.coordinadorRol && (
+                <p className={styles.transportItem}>🏷️ <strong>Rol:</strong> {event.coordinadorRol}</p>
+              )}
+              {event.coordinadorTelefono && (
+                <p>📞 <strong>Teléfono:</strong> {event.coordinadorTelefono}</p>
+              )}
             </div>
           )}
-          <p><strong>🚗 Requiere transporte:</strong> {event.requiresTransport ? "Sí" : "No"}</p>
-          {event.requiresTransport && (
-            <div className={styles.transportDetails}>
-              <p className={styles.transportItem}>🧑‍✈️ <strong>Conductor:</strong> {event.transportDriver || "Pendiente"}</p>
-              <p className={styles.transportItem}>🚘 <strong>Placa:</strong> {event.transportPlate || "Pendiente"}</p>
-              <p>⏰ <strong>Hora de recogida:</strong> {event.transportTime || "Pendiente"}</p>
-            </div>
+
+          {event.notas && (
+            <p><strong>📝 Notas:</strong> {event.notas}</p>
           )}
         </div>
 
