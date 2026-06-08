@@ -5,8 +5,24 @@
 
 .title {
   margin-bottom: 1.5rem;
+  flex-shrink: 0;
 }
 
 .calendarWrapper {
   height: 600px;
+}
+
+@media (max-width: 1023px) {
+  .container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendarWrapper {
+    flex: 1;
+    height: auto;
+    min-height: 300px;
+  }
 }

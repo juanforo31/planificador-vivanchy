@@ -117,3 +117,50 @@ a {
 .rbc-event-content {
   color: white !important;
 }
+
+/* Fix agenda view alignment */
+.rbc-agenda-view {
+  overflow-x: hidden;
+}
+
+.rbc-agenda-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  table-layout: auto;
+}
+
+.rbc-agenda-table thead tr th,
+.rbc-agenda-date-cell,
+.rbc-agenda-time-cell,
+.rbc-agenda-event-cell {
+  text-align: left !important;
+  padding-left: 0.75rem;
+}
+
+.rbc-agenda-event-cell .rbc-event {
+  position: static;
+  width: auto;
+  padding: 4px 8px;
+}
+
+/* Mobile: calendar fills viewport, no vertical scroll */
+@media (max-width: 1023px) {
+  body {
+    overflow-y: hidden;
+  }
+
+  .page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .page-container > main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
