@@ -105,12 +105,53 @@ export async function getClientePorId(id: string): Promise<ClienteRecord | null>
   return airtableFetchById<ClienteFields>("Clientes", id);
 }
 
+export async function getClientes(): Promise<ClienteRecord[]> {
+  return airtableFetch<ClienteFields>("Clientes", { sort: "[{field:'Nombre Completo',direction:'asc'}]" });
+}
+
 export async function getCoordinadores(): Promise<CoordinadorRecord[]> {
   return airtableFetch<CoordinadorFields>("Coordinadores");
 }
 
 export async function getServicios(): Promise<ServicioRecord[]> {
   return airtableFetch<ServicioFields>("Servicios");
+}
+
+async function airtableCreate<TFields>(
+  table: string,
+  fields: Partial<TFields>
+): Promise<AirtableRecord<TFields>> {
+  assertCredentials();
+  const url = `${AIRTABLE_API_URL}/${AIRTABLE_BASE_ID}/${encodeURIComponent(table)}`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { ...authHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify({ fields }),
+  });
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Airtable respondió ${response.status} al crear en "${table}": ${err}`);
+  }
+  return response.json();
+}
+
+export async function crearCliente(fields: Omit<ClienteFields, "Servicios">): Promise<ClienteRecord> {
+  return airtableCreate<ClienteFields>("Clientes", fields);
+}
+
+export interface NuevoServicioFields {
+  "Cliente"?: string[];
+  "Coordinador"?: string[];
+  "Tipo de Servicio"?: string;
+  "Estado"?: EstadoServicio;
+  "Fecha": string;
+  "Dirección Origen"?: string;
+  "Dirección Destino"?: string;
+  "Notas"?: string;
+}
+
+export async function crearServicio(fields: NuevoServicioFields): Promise<ServicioRecord> {
+  return airtableCreate<ServicioFields>("Servicios", fields);
 }
 
 export function mapServicioToEvent(
