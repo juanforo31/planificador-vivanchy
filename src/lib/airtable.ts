@@ -106,7 +106,12 @@ export async function getClientePorId(id: string): Promise<ClienteRecord | null>
 }
 
 export async function getClientes(): Promise<ClienteRecord[]> {
-  return airtableFetch<ClienteFields>("Clientes", { sort: "[{field:'Nombre Completo',direction:'asc'}]" });
+  const records = await airtableFetch<ClienteFields>("Clientes", {
+    filterByFormula: 'NOT({Nombre Completo}="")',
+  });
+  return records.sort((a, b) =>
+    a.fields["Nombre Completo"].localeCompare(b.fields["Nombre Completo"])
+  );
 }
 
 export async function getCoordinadores(): Promise<CoordinadorRecord[]> {
